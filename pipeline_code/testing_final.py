@@ -79,7 +79,7 @@ EL_SR = 24000  # ElevenLabs PCM stream rate
 GAP_FILLERS = ["um...", "uh...", "hmm..."]
 MIN_GAP_DELAY_SEC = 0.3  # Minimum pause before a filler (if selected)
 MAX_GAP_DELAY_SEC = 0.8  # Maximum pause before a filler (if selected)
-GAP_FILLER_PROBABILITY = 1  # 35% chance to insert one at the start of response
+GAP_FILLER_PROBABILITY = 0.75  # 75% chance to insert one at the start of response
 
 # Playback
 VOLUME = 0.9  # 0..1, applied in int16 domain
@@ -953,3 +953,4 @@ if __name__ == "__main__":
     print("Starting AI Voice Assistant server...")
     # allow_unsafe_werkzeug=True is needed for some environments/Flask versions
     socketio.run(app, host="127.0.0.1", port=5000, debug=False, allow_unsafe_werkzeug=True)
+
