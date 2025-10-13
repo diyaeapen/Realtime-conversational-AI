@@ -236,7 +236,7 @@ def el_synthesize_to_play_queue(text: str, gen_id: int):
         byte_iter = client_elevenlabs.text_to_speech.convert(
             voice_id=VOICE_ID,
             text=text,
-            model_id="eleven_multilingual_v2",
+            model_id="eleven_turbo_v2_5",
             output_format="pcm_24000",
         )
     except Exception as e:  # noqa: BLE001
@@ -953,4 +953,5 @@ if __name__ == "__main__":
     print("Starting AI Voice Assistant server...")
     # allow_unsafe_werkzeug=True is needed for some environments/Flask versions
     socketio.run(app, host="127.0.0.1", port=5000, debug=False, allow_unsafe_werkzeug=True)
+
 
