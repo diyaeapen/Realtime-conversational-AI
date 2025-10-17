@@ -24,7 +24,7 @@ from kokoro import KPipeline
 
 # --- CONFIGURATION ---voice_id="ErXwobaYiN019PkySvjV", # Antoni - a common default voice
 # ⚠️ REPLACE WITH YOUR ACTUAL KEY ⚠️
-ELEVENLABS_API_KEY = "sk_5fb4d54231a6cefd7b4c07122a225735d39a981365afb94c" 
+ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "")
 TEST_TEXT = "Testing the latency of the quick brown fox jumping over the lazy dog." 
 OUTPUT_DIR = "tts_latency_results"
 # Use GPU if available
@@ -152,4 +152,5 @@ if __name__ == "__main__":
         for model, latency in sorted_results:
             print(f"| {model:<25} | {latency:^19.4f} |")
     
+
     print("="*50)
