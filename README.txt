@@ -6,6 +6,7 @@ REPO STRUCTURE
 --------------
 .
 ├─ README.txt                (this file)
+├─ requirements.txt          (pinned dependencies for quick setup)
 ├─ latency_test.py           (latency benchmark for Kokoro vs ElevenLabs)
 └─ pipeline_Code/
    ├─ testing_final.py       (Flask + Socket.IO real-time voice assistant)
@@ -21,42 +22,37 @@ WHAT THIS PROJECT DOES
 - Live latency telemetry (STT, first LLM token, first TTS audio, total pipeline).
 - Latency benchmark script to compare Kokoro (local) vs ElevenLabs (API).
 
-PREREQUISITES
--------------
-- Python 3.9 – 3.11
-- Microphone and speaker access
-- Create a virtual environment before installing packages
-
-INSTALL
--------
+QUICK START
+-----------
+# 1) Create and activate a virtual environment
 python -m venv .venv
 # Windows: .venv\Scripts\activate
 # macOS/Linux:
 source .venv/bin/activate
-pip install --upgrade pip
 
-# Core dependencies
-pip install flask flask-socketio python-dotenv openai==1.* sounddevice numpy soundfile
-# Whisper (choose one appropriate for your environment)
-pip install openai-whisper
-# ElevenLabs SDK
-pip install elevenlabs==1.*
+# 2) Install dependencies from requirements.txt
+pip install -r requirements.txt
 
-# Optional for local Kokoro tests (adjust torch wheel for your CUDA/CPU):
-# pip install kokoro-tts phonemizer torch --index-url https://download.pytorch.org/whl/cu121
+# (Optional) If you need an async backend for Socket.IO:
+# pip install eventlet  # or: pip install gevent
 
-ENVIRONMENT VARIABLES
----------------------
-Create pipeline_Code/.env with:
-OPENAI_API_KEY=sk-xxxx
-ELEVENLABS_API_KEY=eleven-xxxx
-ELEVENLABS_VOICE_ID=21m00Tcm4TlvDq8ikWAM
+# (Optional) For local Kokoro benchmarking, also install:
+# pip install kokoro-tts phonemizer torch
 
-RUN THE REAL-TIME ASSISTANT (FLASK)
------------------------------------
+# 3) Configure environment variables (create pipeline_Code/.env)
+# Example:
+# OPENAI_API_KEY=sk-xxxx
+# ELEVENLABS_API_KEY=eleven-xxxx
+# ELEVENLABS_VOICE_ID=21m00Tcm4TlvDq8ikWAM
+
+# 4) Run the real-time assistant (Flask)
 cd pipeline_Code
-python testing_final.py
-# Open the printed URL (default http://127.0.0.1:5000/)
+python testing_final.py  # then open http://127.0.0.1:5000/
+
+PREREQUISITES
+-------------
+- Python 3.9 – 3.11
+- Microphone and speaker access
 
 UI CONTROLS
 -----------
